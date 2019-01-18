@@ -1,6 +1,6 @@
 void setup() {
   // put your setup code here, to run once:
-
+pinMode(4,OUTPUT);
 }
 
 void loop() {
@@ -8,5 +8,5 @@ void loop() {
 //pins to choose 2,3,4,5, 8,9,10,11
 
 
-analogWrite(2,23.5);
+analogWrite(4,255);
 }
