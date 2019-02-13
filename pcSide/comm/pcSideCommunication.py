@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 import time
 
-broker = "143.215.102.14"
+broker = "143.215.87.245" #This will change everytime you reconnect to GTOther
 port = 1883
 topic = "test"
 
