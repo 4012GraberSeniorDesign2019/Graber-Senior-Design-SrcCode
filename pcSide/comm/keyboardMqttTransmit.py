@@ -4,7 +4,7 @@ import time
 from pynput.keyboard import Key, Listener
 
 
-broker = "143.215.87.245"
+broker = "143.215.86.245"
 port = 1883
 topic = "test"
 
