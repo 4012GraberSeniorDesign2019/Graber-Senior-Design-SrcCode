@@ -32,7 +32,7 @@ def on_message(client, userdata, msg):
     if tempMsg.__eq__(controllerOutput):
 
         time.sleep(0.7)
-        ser.write('z')
+        #ser.write('z')
         print('I write in if')
 
         #tempMsg = controllerOutput
