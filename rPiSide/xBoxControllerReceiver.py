@@ -49,7 +49,7 @@ def on_message(client, userdata, msg):
 
 
 #ser = serial.Serial('/dev/ttyACM0',9600)
-print(ser.name)
+#print(ser.name)
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
