@@ -100,57 +100,57 @@ class XboxController(object):
                     #Change action to whatever you want to happen hardware wise
                     if event.axis == 0 and self.axis_data[event.axis] > 0:
                         #"Left Joystick moved right"
-                        buttonAction = 'o'
+                        buttonAction = 'Left Joystick moved right'
                     elif event.axis == 0 and self.axis_data[event.axis] < 0:
                         #button = "Left Joystick"
                         #action = "moved left"
-                        buttonAction = 'p'
+                        buttonAction = 'Left Joystick moved left'
                     elif event.axis == 1 and self.axis_data[event.axis] > 0:
                         #button = "Left Joystick"
                         #action = "moved down"
-                        buttonAction = 'n'
+                        buttonAction = 'Left Joystick moved down'
                     elif event.axis == 1 and self.axis_data[event.axis] < 0:
                         #button = "Left Joystick"
                         #action = "moved up"
-                        buttonAction = 'm'
+                        buttonAction = 'Left Joystick moved up'
                     elif event.axis == 1 and self.axis_data[event.axis] == 0:
                         #Left Joystick moved to the center
-                        buttonAction = 'S'
+                        buttonAction = 'Left Joystick moved to the center'
                     elif event.axis == 2 and self.axis_data[event.axis] < 0:
                         #button = "L2"
                         #action = "let go"
-                        buttonAction = 'I'
+                        buttonAction = 'L2 let go'
                     elif event.axis == 2 and self.axis_data[event.axis] > 0:
                         #button = "L2"
                         #action = "pressed down"
-                        buttonAction = 'i'
+                        buttonAction = 'L2 pressed down'
                     elif event.axis == 3 and self.axis_data[event.axis] < 0:
                         #button = "Right Joystick"
                         #action = "moved left"
-                        buttonAction = 'u'
+                        buttonAction = 'Right Joystick moved left'
                     elif event.axis == 3 and self.axis_data[event.axis] > 0:
                         #button = "Right Joystick"
                         #action = "moved right"
-                        buttonAction = 't'
+                        buttonAction = 'Right Joystick moved right'
                     elif event.axis == 4 and self.axis_data[event.axis] > 0:
                         #button = "Right Joystick"
                         #action = "moved down"
-                        buttonAction = 's'
+                        buttonAction = 'Right Joystick moved down'
                     elif event.axis == 4 and self.axis_data[event.axis] < 0:
                         #button = "Right Joystick"
                         #action = "moved up"
-                        buttonAction = 'r'
+                        buttonAction = 'Right Joystick moved up'
                     elif event.axis == 4 and self.axis_data[event.axis] == 0:
                         #Right Joystick moved to the center
-                        buttonAction = 'S'
+                        buttonAction = 'Right Joystick moved to the center'
                     elif event.axis == 5 and self.axis_data[event.axis] < 0:
                         #button = "R2"
                         #action = "let go"
-                        buttonAction = 'j'
+                        buttonAction = 'R2 let go'
                     elif event.axis == 5 and self.axis_data[event.axis] > 0:
                         #button = "R2"
                         #action = "pressed down"
-                        buttonAction = 'J'
+                        buttonAction = 'R2 pressed down'
 
                 elif event.type == pygame.JOYBUTTONDOWN:
                     self.button_data[event.button] = True
@@ -158,55 +158,55 @@ class XboxController(object):
                     if event.button == 0 and self.button_data[event.button] == True :
                         #button = "X button"
                         #action = "pressed"
-                        buttonAction = 'a'
+                        buttonAction = 'X button pressed'
                     elif event.button == 1 and self.button_data[event.button] == True :
                         #button = "O button"
                         #action = "pressed"
-                        buttonAction = 'c'
+                        buttonAction = 'O button pressed'
                     elif event.button == 2 and self.button_data[event.button] == True :
                         #button = "Triangle button"
                         #action = "pressed"
-                        buttonAction = 'd'
+                        buttonAction = 'Triangle button pressed'
                     elif event.button == 3 and self.button_data[event.button] == True :
                         #button = "Square button"
                         #action = "pressed"
-                        buttonAction = 'b'
+                        buttonAction = 'Square button pressed'
                     elif event.button == 4 and self.button_data[event.button] == True :
                         #button = "L1 button"
                         #action = "pressed"
-                        buttonAction = 'k'
+                        buttonAction = 'L1 button pressed'
                     elif event.button == 5 and self.button_data[event.button] == True :
                         #button = "R1 button"
                         #action = "pressed"
-                        buttonAction = 'l'
+                        buttonAction = 'R1 button pressed'
                     elif event.button == 6 and self.button_data[event.button] == True :
                         #button = "L2 button"
                         #action = "pressed"
-                        buttonAction = 'i'
+                        buttonAction = 'L2 button pressed'
                     elif event.button == 7 and self.button_data[event.button] == True :
                         #button = "R2 button"
                         #action = "pressed"
-                        buttonAction = 'j'
+                        buttonAction = 'R2 button pressed'
                     elif event.button == 8 and self.button_data[event.button] == True :
                         #button = "Share button"
                         #action = "pressed"
-                        buttonAction = 'x'
+                        buttonAction = 'Start button pressed'
                     elif event.button == 9 and self.button_data[event.button] == True :
                         #button = "Options button"
                         #action = "pressed"
-                        buttonAction = 'y'
+                        buttonAction = 'Select button pressed'
                     elif event.button == 10 and self.button_data[event.button] == True :
                         #button = "PS4 Home button"
                         #action = "pressed"
-                        buttonAction = 'S'
+                        buttonAction = 'Xbox button pressed'
                     elif event.button == 11 and self.button_data[event.button] == True :
                         #button = "Left Joystick button"
                         #action = "pressed"
-                        buttonAction = 'q'
+                        buttonAction = 'Left Joystick button pressed'
                     elif event.button == 12 and self.button_data[event.button] == True :
                         #button = "Right Joystick button"
                         #action = "pressed"
-                        buttonAction = 'v'
+                        buttonAction = 'Right Joystick button pressed'
                 elif event.type == pygame.JOYBUTTONUP:
                     self.button_data[event.button] = False
                     #Placed the print command inside the if else so that the event member was defined
@@ -214,55 +214,55 @@ class XboxController(object):
                     if event.button == 0 and self.button_data[event.button] == False :
                         #button = "X button"
                         #action = "let go"
-                        buttonAction = 'A'
+                        buttonAction = 'X button let go'
                     elif event.button == 1 and self.button_data[event.button] == False :
                         #button = "O button"
                         #action = "let go"
-                        buttonAction = 'C'
+                        buttonAction = 'O button let go'
                     elif event.button == 2 and self.button_data[event.button] == False :
                         #button = "Triangle button"
                         #action = "let go"
-                        buttonAction = 'D'
+                        buttonAction = 'Triangle button let go'
                     elif event.button == 3 and self.button_data[event.button] == False :
                         #button = "Square button"
                         #action = "let go"
-                        buttonAction = 'B'
+                        buttonAction = 'Square button let go'
                     elif event.button == 4 and self.button_data[event.button] == False :
                         #button = "L1 button"
                         #action = "let go"
-                        buttonAction = 'K'
+                        buttonAction = 'L1 button let go'
                     elif event.button == 5 and self.button_data[event.button] == False :
                         #button = "R1 button"
                         #action = "let go"
-                        buttonAction = 'L'
+                        buttonAction = 'R1 button let go'
                     elif event.button == 6 and self.button_data[event.button] == False :
                         #button = "L2 button"
                         #action = "let go"
-                        buttonAction = 'I'
+                        buttonAction = 'L2 button let go'
                     elif event.button == 7 and self.button_data[event.button] == False :
                         #button = "R2 button"
                         #action = "let go"
-                        buttonAction = 'J'
+                        buttonAction = 'R2 button let go'
                     elif event.button == 8 and self.button_data[event.button] == False :
                         #button = "Share button"
                         #action = "let go"
-                        buttonAction = 'X'
+                        buttonAction = 'Select button let go'
                     elif event.button == 9 and self.button_data[event.button] == False :
                         #button = "Options button"
                         #action = "let go"
-                        buttonAction = 'Y'
+                        buttonAction = 'Start button let go'
                     elif event.button == 10 and self.button_data[event.button] == False :
                         #button = "PS4 Home button"
                         #action = "let go"
-                        buttonAction = 'S'
+                        buttonAction = 'Xbox button let go'
                     elif event.button == 11 and self.button_data[event.button] == False :
                         #button = "Left Joystick button"
                         #action = "let go"
-                        buttonAction = 'Q'
+                        buttonAction = 'Left Joystick button let go'
                     elif event.button == 12 and self.button_data[event.button] == False :
                         #button = "Right Joystick button"
                         #action = "let go"
-                        buttonAction = 'V'
+                        buttonAction = 'Right Joystick button let go'
 
                 elif event.type == pygame.JOYHATMOTION:
                     self.hat_data[event.hat] = event.value
@@ -270,22 +270,22 @@ class XboxController(object):
                     if event.value == (1,0):
                         #button = "Right Button"
                         #action = "was pressed"
-                        buttonAction = 'h'
+                        buttonAction = 'Right button pressed'
                     elif event.value == (-1,0):
                         #button = "Left Button"
                         #action = "was pressed"
-                        buttonAction = 'g'
+                        buttonAction = 'Left Button was pressed'
                     elif event.value == (0,-1):
                         #button = "Down Button"
                         #action = "was pressed"
-                        buttonAction = 'f'
+                        buttonAction = 'Down button was pressed'
                     elif event.value == (0,1):
                         #button = "Up Button"
                         #action = "was pressed"
-                        buttonAction = 'e'
+                        buttonAction = 'Up button was pressed'
                     elif event.value == (0,0):
                         #Stops all motion
-                        buttonAction = 'H'
+                        buttonAction = 'Everything was released'
 
 
                 #pprint.pprint("%s was %s."%(button,action))
