@@ -3,7 +3,7 @@ import time
 #import serial
 import pdb
 
-broker = "143.215.98.134"
+broker = "143.215.102.14"
 port = 1883
 topic = "controller"
 global controllerOutput

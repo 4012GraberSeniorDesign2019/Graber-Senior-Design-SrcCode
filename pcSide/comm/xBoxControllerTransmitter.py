@@ -12,7 +12,7 @@ class XboxController(object):
     axis_data = None
     button_data = None
     hat_data = None
-    broker = "143.215.98.134"
+    broker = "143.215.102.14"
     port = 1883
     global topic
     topic = "controller"
