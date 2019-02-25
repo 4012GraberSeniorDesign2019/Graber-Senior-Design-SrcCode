@@ -1,9 +1,10 @@
+#Receiver Side 
 import paho.mqtt.client as mqtt
 import time
 import serial
 import pdb
 
-broker = "143.215.102.14"
+broker = "143.215.102.14" #Change to the IP addr of the PC every reconnect
 port = 1883
 topic = "test"
 
