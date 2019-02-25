@@ -23,7 +23,7 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.connect(broker, port)
 
-for i in range(0,10):
+for i in range(0,30):
     client.publish(topic,"Boo Back")
     time.sleep(1)
 

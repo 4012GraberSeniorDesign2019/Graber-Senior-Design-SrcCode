@@ -6,7 +6,7 @@ import pprint
 import pygame
 
 class XboxController(object):
-    """Class representing the PS4 controller. Pretty straightforward functionality."""
+    """Class representing the Xbox controller. Pretty straightforward functionality."""
 
     controller = None
     axis_data = None
