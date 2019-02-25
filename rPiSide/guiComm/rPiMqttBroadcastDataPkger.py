@@ -3,10 +3,11 @@
 
 import paho.mqtt.client as mqtt
 import time
+import random
 
 broker = "143.215.98.187" #This will change everytime you reconnect to GTOther (Set it to be the RPi IP addr)
 port = 1883
-topic = "guiTest"
+topic = "guiSensorData"
 
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -25,8 +26,18 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.connect(broker, port)
 
-for i in range(0,30):
-    client.publish(topic,"Boo Back")
+#This will stand in place of the sensor data received via serial from
+#the Arduino due
+
+for i in range(0,10):
+    #AirQualitySensor
+    aQS = random.random()
+    #InfraredTempSensor
+    iRS = random.random()
+    #GasContentSensor
+    gCS = random.random()
+    sensorData= 'aQS: %.2f, iRS: %.2f, gCS: %.2f' %(aQS,iRS,gCS)
+    client.publish(topic,sensorData)    
     time.sleep(1)
 
 # Blocking call that processes network traffic, dispatches callbacks and
