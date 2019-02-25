@@ -1,11 +1,14 @@
+#Communication protocol (subscriber end) for the Raspberry Pi to the PC to
+#send GUI info
+
 import paho.mqtt.client as mqtt
 import time
 import serial
 import pdb
 
-broker = "143.215.102.14" #Always set this to the IP addr of the PC 
+broker = "143.215.98.187" #Always set this to the IP addr of the RPi
 port = 1883
-topic = "test"
+topic = "guiTest"
 
 tempMsg = ''
 
@@ -28,3 +31,4 @@ client.subscribe(topic)
 client.on_message
 
 client.loop_forever()
+
