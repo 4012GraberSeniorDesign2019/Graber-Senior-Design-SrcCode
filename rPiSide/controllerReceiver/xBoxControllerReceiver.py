@@ -33,19 +33,18 @@ def on_message(client, userdata, msg):
 
         time.sleep(0.7)
         #ser.write('z')
-        print('I write in if')
+        #print('I write in if')
 
-        #tempMsg = controllerOutput
+        tempMsg = controllerOutput
     else:
-        print(controllerOutput)
+        #print(controllerOutput)
         #ser.write(controllerOutput)
-        print('I write in else')
+        #print('I write in else')
         tempMsg = controllerOutput
 
     #read_val = ser.read()
     read_Val = tempMsg
-    #print ("line 45")
-    print read_val
+    #print read_val
 
 
 #ser = serial.Serial('/dev/ttyACM0',9600)

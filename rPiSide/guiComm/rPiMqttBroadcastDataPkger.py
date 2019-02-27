@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 import time
 import random
 
-broker = "143.215.98.187" #This will change everytime you reconnect to GTOther (Set it to be the RPi IP addr)
+broker = "143.215.97.110" #This will change everytime you reconnect to GTOther (Set it to be the RPi IP addr)
 port = 1883
 topic = "guiSensorData"
 
