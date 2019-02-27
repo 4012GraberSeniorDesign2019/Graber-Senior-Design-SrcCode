@@ -1,3 +1,5 @@
+#Broadcasts MQTT commands from the xbox input from the pc side
+
 import paho.mqtt.client as mqtt
 #import serial
 import time
@@ -156,21 +158,21 @@ class XboxController(object):
                     self.button_data[event.button] = True
                     #Change action to whatever you want to happen hardware wise
                     if event.button == 0 and self.button_data[event.button] == True :
+                        #button = "A button"
+                        #action = "pressed"
+                        buttonAction = 'A button pressed'
+                    elif event.button == 1 and self.button_data[event.button] == True :
+                        #button = "B button"
+                        #action = "pressed"
+                        buttonAction = 'B button pressed'
+                    elif event.button == 2 and self.button_data[event.button] == True :
                         #button = "X button"
                         #action = "pressed"
                         buttonAction = 'X button pressed'
-                    elif event.button == 1 and self.button_data[event.button] == True :
-                        #button = "O button"
-                        #action = "pressed"
-                        buttonAction = 'O button pressed'
-                    elif event.button == 2 and self.button_data[event.button] == True :
-                        #button = "Triangle button"
-                        #action = "pressed"
-                        buttonAction = 'Triangle button pressed'
                     elif event.button == 3 and self.button_data[event.button] == True :
-                        #button = "Square button"
+                        #button = "Y button"
                         #action = "pressed"
-                        buttonAction = 'Square button pressed'
+                        buttonAction = 'Y button pressed'
                     elif event.button == 4 and self.button_data[event.button] == True :
                         #button = "L1 button"
                         #action = "pressed"
@@ -188,17 +190,17 @@ class XboxController(object):
                         #action = "pressed"
                         buttonAction = 'R2 button pressed'
                     elif event.button == 8 and self.button_data[event.button] == True :
-                        #button = "Share button"
+                        #button = "Xbox button"
                         #action = "pressed"
-                        buttonAction = 'Start button pressed'
+                        buttonAction = 'Xbox button pressed'
                     elif event.button == 9 and self.button_data[event.button] == True :
                         #button = "Options button"
                         #action = "pressed"
-                        buttonAction = 'Select button pressed'
+                        buttonAction = 'Left Joystick button pressed'
                     elif event.button == 10 and self.button_data[event.button] == True :
                         #button = "PS4 Home button"
                         #action = "pressed"
-                        buttonAction = 'Xbox button pressed'
+                        buttonAction = 'Right Joystick button pressed'
                     elif event.button == 11 and self.button_data[event.button] == True :
                         #button = "Left Joystick button"
                         #action = "pressed"
@@ -212,21 +214,21 @@ class XboxController(object):
                     #Placed the print command inside the if else so that the event member was defined
                     #pprint.pprint(self.button_dataKeyCommandsRelease[int(event.button)])
                     if event.button == 0 and self.button_data[event.button] == False :
+                        #button = "A button"
+                        #action = "let go"
+                        buttonAction = 'A button let go'
+                    elif event.button == 1 and self.button_data[event.button] == False :
+                        #button = "B button"
+                        #action = "let go"
+                        buttonAction = 'B button let go'
+                    elif event.button == 2 and self.button_data[event.button] == False :
                         #button = "X button"
                         #action = "let go"
                         buttonAction = 'X button let go'
-                    elif event.button == 1 and self.button_data[event.button] == False :
-                        #button = "O button"
-                        #action = "let go"
-                        buttonAction = 'O button let go'
-                    elif event.button == 2 and self.button_data[event.button] == False :
-                        #button = "Triangle button"
-                        #action = "let go"
-                        buttonAction = 'Triangle button let go'
                     elif event.button == 3 and self.button_data[event.button] == False :
-                        #button = "Square button"
+                        #button = "Y button"
                         #action = "let go"
-                        buttonAction = 'Square button let go'
+                        buttonAction = 'Y button let go'
                     elif event.button == 4 and self.button_data[event.button] == False :
                         #button = "L1 button"
                         #action = "let go"
@@ -244,17 +246,17 @@ class XboxController(object):
                         #action = "let go"
                         buttonAction = 'R2 button let go'
                     elif event.button == 8 and self.button_data[event.button] == False :
-                        #button = "Share button"
+                        #button = "Xbox button"
                         #action = "let go"
-                        buttonAction = 'Select button let go'
+                        buttonAction = 'Xbox button let go'
                     elif event.button == 9 and self.button_data[event.button] == False :
                         #button = "Options button"
                         #action = "let go"
-                        buttonAction = 'Start button let go'
+                        buttonAction = 'Left Joystick button let go'
                     elif event.button == 10 and self.button_data[event.button] == False :
                         #button = "PS4 Home button"
                         #action = "let go"
-                        buttonAction = 'Xbox button let go'
+                        buttonAction = 'Right Joystick button let go'
                     elif event.button == 11 and self.button_data[event.button] == False :
                         #button = "Left Joystick button"
                         #action = "let go"
@@ -301,7 +303,7 @@ class XboxController(object):
                 #	tempAction = buttonAction
                 #else:
                 #    print(tempAction,buttonAction)
-                print(controllerAction)   #left for debugging purposes
+                #print(controllerAction)   #left for debugging purposes
                 #read_val = ser.read_until(controllerAction,1)
                 #print read_val
 

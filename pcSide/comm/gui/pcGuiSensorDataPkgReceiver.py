@@ -6,7 +6,7 @@ import time
 import serial
 import pdb
 
-broker = "143.215.98.187" #Always set this to the IP addr of the RPi
+broker = "143.215.97.110" #Always set this to the IP addr of the RPi
 port = 1883
 topic = "guiSensorData"
 
@@ -22,6 +22,7 @@ def on_message(client, userdata, msg):
 
 
     print(msg.topic +" "+str(msg.payload))
+    tempMsg = msg
 
 
 client = mqtt.Client()
