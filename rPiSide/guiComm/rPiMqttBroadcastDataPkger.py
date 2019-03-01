@@ -29,7 +29,7 @@ client.connect(broker, port)
 #This will stand in place of the sensor data received via serial from
 #the Arduino due
 
-for i in range(0,10):
+while True:
     #AirQualitySensor
     aQS = random.random()
     #InfraredTempSensor
