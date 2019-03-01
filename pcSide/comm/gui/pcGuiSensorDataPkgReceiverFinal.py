@@ -3,8 +3,8 @@
 
 import paho.mqtt.client as mqtt
 import time
-import serial
-import pdb
+#import serial
+#import pdb
 
 class guiSensorDataReceiver(object):
     """Class accepting the sensor inputs from the rPi and translating it into lists"""
@@ -24,7 +24,7 @@ class guiSensorDataReceiver(object):
 
 
 
-    def on_connect(client, userdata, rc):
+    def on_connect(client, userdata,flags, rc):
         print("Connected with result code "+str(rc))
 
         client.subscribe(broker)
@@ -50,8 +50,8 @@ class guiSensorDataReceiver(object):
 
         print(topic)
         client = mqtt.Client()
-        on_connect = client.on_connect
-        on_message = client.on_message
+        client.on_connect = guiSensorDataReceiver.on_connect
+        client.on_message = guiSensorDataReceiver.on_message
         client.connect(broker,port)
         client.subscribe(topic)
         print(tempMsg)    #For debugging purposes
