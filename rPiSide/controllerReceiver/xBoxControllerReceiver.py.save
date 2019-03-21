@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 import time
-#import serial
+import serial
 import pdb
 
 broker = "143.215.102.14"
@@ -8,9 +8,9 @@ port = 1883
 topic = "controller"
 global controllerOutput
 controllerOutput = ""
-#global tempMsg
+global tempMsg
 tempMsg = ''
-#addr = "/dev/ttyACM0"
+addr = "/dev/ttyACM0"
 def on_connect(client, userdata, rc):
     print("Connected with result code "+str(rc))
 
@@ -33,25 +33,19 @@ def on_message(client, userdata, msg):
 
         time.sleep(0.7)
         ser.write('z')
-        print('I write in if')
+        #print('I write in if')
 
-        #tempMsg = controllerOutput
-    
-    elif controllerOutput.__eq__('Y button pressed'):
-        if(ser.in_waiting >0):
-            ser.write(controllerOutput)
-            line = ser.readline()
-            print(line)
+        tempMsg = controllerOutput
     else:
         print(controllerOutput)
-        #ser.write(controllerOutput)
-        print('I write in else')
+        ser.write(controllerOutput)
+        #print('I write in else')
         tempMsg = controllerOutput
 
-    #read_val = ser.read()
-    read_Val = tempMsg
-    #print ("line 45")
+    read_val = ser.read()
+    #read_Val = tempMsg
     print read_val
+
 
 #ser = serial.Serial('/dev/ttyACM0',9600)
 #print(ser.name)
