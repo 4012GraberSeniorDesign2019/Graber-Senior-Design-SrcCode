@@ -1,7 +1,7 @@
 import clientObjClass as cli
 import guiSubscriber as guiSub
 
-broker = '143.215.95.101'
+broker = '143.215.95.16'
 port = 1883
 topic = 'guiParseTest'
 
@@ -29,10 +29,13 @@ print('Here in the subscriber')
 while True:
     print('Data received')
     sensorData = clieSub.receiveGuiData()
+    print('Output from receive Gui Data')
+    print(sensorData)
     #tracker += 1
     #print('At ' + str(tracker) + ' second ' + str(status))
-    #newData = clieSub.parseGuiData(sensorData)
+    newData = clieSub.parseGuiData(sensorData)
     print('Data parsed into dictionary')
     print(newData)
+    print('\n')
 
 clieSub.foreverLoopClient()

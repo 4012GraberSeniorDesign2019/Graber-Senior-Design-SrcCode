@@ -5,7 +5,7 @@ import time
 import serial
 import random
 
-broker = '143.215.95.101'
+broker = '143.215.95.16'
 port = 1883
 topic = 'guiParseTest'
 tracker = 0
@@ -39,15 +39,16 @@ while True:
     iRS = random.random()
     #GasContentSensor
     gCS = random.random()
+    print('Sending this data to the subscriber')
     sensorData= "aQS: %.2f, gCS: %.2f, iRS: %.2f" % (aQS,gCS,iRS)
     time.sleep(1)
     status = cliePub.publishInfo(sensorData)
     #tracker += 1
     #print('At ' + str(tracker) + ' second ' + str(status))
-    newData = cliePub.parseGuiData(sensorData)
-    print('Data parsed into dictionary')
-    print(newData)
-    print('\n')
+    #newData = cliePub.parseGuiData(sensorData)
+    #print('Data parsed into dictionary')
+    #print(newData)
+    #print('\n')
 
 cliePub.foreverLoopClient()
 

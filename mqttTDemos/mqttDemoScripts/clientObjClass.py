@@ -74,10 +74,11 @@ class clientObjClass(object):
         subTestClient = self.getClient()
         print('Got into print from subscriber')
         #subTestClient.on_message()
-        
+
         print('Subscribed simply')
-        print("%s %s" % (str(subData.topic), str(subData.payload)))
-        return(str(subData.payload))
+        subData = subscribe.simple(self.__topic,hostname = self.__broker,port = self.__port)
+        #print("%s %s" % (str(subData.topic), str(subData.payload)))
+        return(subData)
 
     def on_log(client, obj, level, string):
         print(string)

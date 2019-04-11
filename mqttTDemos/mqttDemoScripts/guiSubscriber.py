@@ -26,10 +26,13 @@ class guiSubscriber(object):
         self.__clientObj.connectClient()
         self.__connectionStatus = True
 
+
     def receiveGuiData(self):
         subscribedData = self.__clientObj.printFromSubscriber()
-        print('subscribed Data')
-        self.__sensorDataPreParse = subscribedData
+        #subData = subscribedData.payload
+        #print('subscribed Data')
+        #print(str(subData))
+        self.__sensorDataPreParse = subscribedData.payload
         return(self.__sensorDataPreParse)
 
     def foreverLoopClient(self):
@@ -46,7 +49,7 @@ class guiSubscriber(object):
 
         sensorList = data.split(",")
 
-        if 'aQS' in sensorList[0] or 'iRS' in sensorList[1] or 'gCS' in sensorList[2]:
+        if 'aQS' in sensorList[0] or 'gCS' in sensorList[1] or 'iRS' in sensorList[2]:
 
             aQSFloat = sensorList[0]
             aQSFloatData = aQSFloat.split(":")
@@ -54,11 +57,11 @@ class guiSubscriber(object):
 
             iRSFloat = sensorList[1]
             iRSFloatData = iRSFloat.split(":")
-            self.__sensorDataPostParse['InfraredTempSensor'] = iRSFloatData[1]
+            self.__sensorDataPostParse['GasContentSensor'] = iRSFloatData[1]
 
             gCSFloat = sensorList[2]
             gCSFloatData = gCSFloat.split(":")
-            self.__sensorDataPostParse['GasContentSensor'] = gCSFloatData[1]
+            self.__sensorDataPostParse['InfraredTempSensor'] = gCSFloatData[1]
 
         return(self.__sensorDataPostParse)
 
