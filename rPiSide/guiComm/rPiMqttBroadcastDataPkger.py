@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 import time
 import random
 
-broker = "143.215.100.24" #This will change everytime you reconnect to GTOther (Set it to be the RPi IP addr)
+broker = '143.215.93.108' #This will change everytime you reconnect to GTOther (Set it to be the RPi IP addr)
 port = 1883
 topic = "guiSensorData"
 
@@ -37,7 +37,7 @@ while True:
     #GasContentSensor
     gCS = random.random()
     sensorData= 'aQS: %.2f, iRS: %.2f, gCS: %.2f' %(aQS,iRS,gCS)
-    client.publish(topic,sensorData)    
+    client.publish(topic,sensorData)
     time.sleep(1)
 
 # Blocking call that processes network traffic, dispatches callbacks and
@@ -45,4 +45,3 @@ while True:
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
 client.loop_forever()
-

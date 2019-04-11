@@ -8,6 +8,9 @@ class guiSubscriber(object):
         self.__connectionStatus = False
         clientObj = cli.clientObjClass()
         self.__clientObj = clientObj
+        self.__guiDataPreParse = ''
+        self.__sensorDataPostParse = {'AirQualitySensor': '', 'InfraredTempSensor' : '', 'GasContentSensor' : ''}
+
 
     def getClient(self):
         a = self.__clientObj.getClient()
@@ -23,11 +26,43 @@ class guiSubscriber(object):
         self.__clientObj.connectClient()
         self.__connectionStatus = True
 
+    def receiveGuiData(self):
+        subscribedData = self.__clientObj.printFromSubscriber()
+        print('subscribed Data')
+        self.__sensorDataPreParse = subscribedData
+        return(self.__sensorDataPreParse)
+
+    def foreverLoopClient(self):
+        self.__clientObj.loopClientForever()
+
     def startSubscribeLoop(self,indicator):
         self.__clientObj.startLoop(indicator)
 
     def stopSubscribeLoop(self):
         self.__clientObj.endLoop()
+
+    def parseGuiData(self,data):
+        self.__sensorDataPreParse = data
+
+        sensorList = data.split(",")
+
+        if 'aQS' in sensorList[0] or 'iRS' in sensorList[1] or 'gCS' in sensorList[2]:
+
+            aQSFloat = sensorList[0]
+            aQSFloatData = aQSFloat.split(":")
+            self.__sensorDataPostParse['AirQualitySensor'] = aQSFloatData[1]
+
+            iRSFloat = sensorList[1]
+            iRSFloatData = iRSFloat.split(":")
+            self.__sensorDataPostParse['InfraredTempSensor'] = iRSFloatData[1]
+
+            gCSFloat = sensorList[2]
+            gCSFloatData = gCSFloat.split(":")
+            self.__sensorDataPostParse['GasContentSensor'] = gCSFloatData[1]
+
+        return(self.__sensorDataPostParse)
+
+
 
     def checkConnection(self):
         return(self.__connectionStatus)

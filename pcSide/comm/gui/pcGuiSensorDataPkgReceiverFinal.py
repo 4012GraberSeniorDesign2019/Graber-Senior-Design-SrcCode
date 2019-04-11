@@ -11,7 +11,7 @@ class guiSensorDataReceiver(object):
 
     def __init__(self):
         global broker
-        broker = "143.215.100.24" #Always set this to the IP addr of the RPi
+        broker = '143.215.93.108' #Always set this to the IP addr of the RPi
         global port
         port = 1883
         global topic
@@ -24,12 +24,14 @@ class guiSensorDataReceiver(object):
 
 
 
-    def on_connect(client, userdata,flags, rc):
+    def on_connect(self,client):
+        #userdata,flags, rc
         print("Connected with result code "+str(rc))
 
         client.subscribe(broker)
 
-    def on_message(client, userdata, msg):
+    def on_message(self,client=):
+        #userdata,msg
         print(msg.topic +" "+str(msg.payload))
 
         tempMsg = (msg.topic +" "+str(msg.payload)+"DePkg")
@@ -50,8 +52,8 @@ class guiSensorDataReceiver(object):
 
         print(topic)
         client = mqtt.Client()
-        client.on_connect = guiSensorDataReceiver.on_connect
-        client.on_message = guiSensorDataReceiver.on_message
+        guiData.on_connect = guiData.on_connect()
+        guiData.on_message = guiData.on_message()
         client.connect(broker,port)
         client.subscribe(topic)
         print(tempMsg)    #For debugging purposes
