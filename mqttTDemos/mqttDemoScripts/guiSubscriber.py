@@ -51,18 +51,22 @@ class guiSubscriber(object):
 
             aQSFloat = sensorList[0]
             aQSFloatData = aQSFloat.split(":")
+            aQSFloatData[1] = float(aQSFloatData[1])
             self.__sensorDataPostParse['AirQualitySensor'] = aQSFloatData[1]
 
             aTSFloat = sensorList[1]
             aTSFloatData = aTSFloat.split(":")
+            aTSFloatData[1] = float(aTSFloatData[1])
             self.__sensorDataPostParse['AmbientTempSensor'] = aTSFloatData[1]
 
             gCSFloat = sensorList[2]
             gCSFloatData = gCSFloat.split(":")
+            gCSFloatData[1] = float(gCSFloatData[1])
             self.__sensorDataPostParse['GasContentSensor'] = gCSFloatData[1]
 
             oTSFloat = sensorList[3]
             oTSFloatData = oTSFloat.split(":")
+            oTSFloatData[1] = float(oTSFloatData[1])
             self.__sensorDataPostParse['ObjectTempSensor'] = oTSFloatData[1]
 
         return(self.__sensorDataPostParse)
