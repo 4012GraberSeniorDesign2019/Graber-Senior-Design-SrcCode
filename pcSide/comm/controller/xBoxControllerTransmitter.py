@@ -58,6 +58,7 @@ class XboxController(object):
         #ser = serial.Serial('/dev/ttyACM0',9600)
         #print(ser.name)
 
+        #Leave initialization there in the function
         if not self.axis_data:
             self.axis_data = {}
             #Left Joystick L(0: -1.0) R(0: 1.0) U(1: -1.0) D(1: 1.0)
@@ -95,7 +96,7 @@ class XboxController(object):
                 #Left - (-1,0)
                 #Right - (1,0)
 
-        while True:
+        while True:  # Seperate listening loop into seperate function to be called repeatedly by the GUI
             for event in pygame.event.get():
                 if event.type == pygame.JOYAXISMOTION:
                     self.axis_data[event.axis] = round(event.value,2)

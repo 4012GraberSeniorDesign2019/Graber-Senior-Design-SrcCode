@@ -2,14 +2,14 @@ import clientObjClass as cli
 import pdb
 
 
-class guiSubscriber(object):
+class controlSubscriber(object):
 
     def __init__(self):
         self.__connectionStatus = False
         clientObj = cli.clientObjClass()
         self.__clientObj = clientObj
         self.__guiDataPreParse = ''
-        self.__sensorDataPostParse = {'AirQualitySensor': '', 'AmbientTempSensor' : '', 'GasContentSensor' : '','ObjectTempSensor':''}
+        self.__sensorDataPostParse = {'AirQualitySensor': '', 'InfraredTempSensor' : '', 'GasContentSensor' : ''}
 
 
     def getClient(self):
@@ -27,7 +27,7 @@ class guiSubscriber(object):
         self.__connectionStatus = True
 
 
-    def receiveGuiData(self):
+    def receiveMvmnt(self):
         subscribedData = self.__clientObj.printFromSubscriber()
         print('subscribed Data')
         self.__sensorDataPreParse = subscribedData.payload
@@ -44,28 +44,26 @@ class guiSubscriber(object):
 
     def parseGuiData(self,data):
         self.__sensorDataPreParse = data
-
+        data = str(data)  #Due to Python 3 update, information needs to be cast as a string again
         sensorList = data.split(",")
 
-        if 'aQS' in sensorList[0] or 'aTS' in sensorList[1] or 'gCS' in sensorList[2] or 'oTS' in sensorList[3] :
+        if 'aQS' in sensorList[0] or 'gCS' in sensorList[1] or 'iRS' in sensorList[2]:
 
             aQSFloat = sensorList[0]
             aQSFloatData = aQSFloat.split(":")
             self.__sensorDataPostParse['AirQualitySensor'] = aQSFloatData[1]
 
-            aTSFloat = sensorList[1]
-            aTSFloatData = aTSFloat.split(":")
-            self.__sensorDataPostParse['AmbientTempSensor'] = aTSFloatData[1]
+            iRSFloat = sensorList[1]
+            iRSFloatData = iRSFloat.split(":")
+            self.__sensorDataPostParse['GasContentSensor'] = iRSFloatData[1]
 
             gCSFloat = sensorList[2]
             gCSFloatData = gCSFloat.split(":")
-            self.__sensorDataPostParse['GasContentSensor'] = gCSFloatData[1]
-
-            oTSFloat = sensorList[3]
-            oTSFloatData = oTSFloat.split(":")
-            self.__sensorDataPostParse['ObjectTempSensor'] = oTSFloatData[1]
+            self.__sensorDataPostParse['InfraredTempSensor'] = gCSFloatData[1]
 
         return(self.__sensorDataPostParse)
+
+
 
     def checkConnection(self):
         return(self.__connectionStatus)
