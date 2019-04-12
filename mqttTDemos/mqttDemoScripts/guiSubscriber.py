@@ -44,7 +44,7 @@ class guiSubscriber(object):
 
     def parseGuiData(self,data):
         self.__sensorDataPreParse = data
-
+        data = str(data) #Casting to string type due to error between python 2 and 3
         sensorList = data.split(",")
 
         if 'aQS' in sensorList[0] or 'aTS' in sensorList[1] or 'gCS' in sensorList[2] or 'oTS' in sensorList[3] :
