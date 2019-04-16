@@ -2,7 +2,7 @@ import serial
 import time
 
 ser = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=2)
-message = "this is sent to the Arduino"
+message = "Left button pressed"
 print(ser.in_waiting)
 while True:
     while (ser.in_waiting>0):

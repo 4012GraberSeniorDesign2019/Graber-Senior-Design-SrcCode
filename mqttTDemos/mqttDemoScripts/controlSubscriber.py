@@ -54,23 +54,25 @@ class controlSubscriber(object):
     def writeToDUE(self,mvmntMsg):
         #Adding the serial write method here to write to the motors
         #on the Arduino DUE
-
         print('wrote to DUE')
-        ser = serial.Serial(port= self.__serial_port, baudrate=9600, timeout=0.1)
-
-        while (ser.in_waiting>0):
-            print("in: "+str(ser.in_waiting))
-            ser.reset_input_buffer()
-            time.sleep(.01)
-        while (ser.out_waiting>0):
-            print("out: "+str(ser.out_waiting))
-            ser.reset_output_buffer()
-            time.sleep(.01)
-        ser.write(mvmntMsg.encode())
-        print("message sent")
-        data = ser.readline()
-        if data or True:
-            print(data.decode())
-            print(type(data.decode()))
-        else:
-            print('nothing')
+        ser = serial.Serial(port= self.__serial_port, baudrate=9600, timeout=5)
+        while True:
+            while (ser.in_waiting>0):
+                print("in: "+str(ser.in_waiting))
+                ser.reset_input_buffer()
+                time.sleep(.01)
+            while (ser.out_waiting>0):
+                print("out: "+str(ser.out_waiting))
+                ser.reset_output_buffer()
+                time.sleep(.01)
+            ser.write(mvmntMsg.encode())
+            print("message sent")
+            data = ser.readline()
+            if data:
+                print(data.decode())
+                print(type(data.decode()))
+                break
+            else:
+                print('nothing')
+                
+        return(data.decode())
