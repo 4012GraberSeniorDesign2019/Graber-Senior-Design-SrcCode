@@ -1,9 +1,9 @@
 import clientObjClass as cli
 import controlSubscriber as controlSub
 
-broker = '192.168.137.1'#This should be the IP address
+broker = '143.215.107.227'#This should be the IP address
 #of the computer with GUI
-port = 1883
+port = 1883 #formerly 1883
 topic = 'controllerTest'
 serialPort = '/dev/ttyACM0'
 
