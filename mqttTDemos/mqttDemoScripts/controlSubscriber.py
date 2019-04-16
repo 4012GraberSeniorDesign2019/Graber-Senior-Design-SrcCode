@@ -1,5 +1,7 @@
 import clientObjClass as cli
 import pdb
+import serial
+import time
 
 
 class controlSubscriber(object):
@@ -8,9 +10,7 @@ class controlSubscriber(object):
         self.__connectionStatus = False
         clientObj = cli.clientObjClass()
         self.__clientObj = clientObj
-        self.__guiDataPreParse = ''
-        self.__sensorDataPostParse = {'AirQualitySensor': '', 'InfraredTempSensor' : '', 'GasContentSensor' : ''}
-
+        self.__serial_port = ''
 
     def getClient(self):
         a = self.__clientObj.getClient()
@@ -26,6 +26,8 @@ class controlSubscriber(object):
         self.__clientObj.connectClient()
         self.__connectionStatus = True
 
+    def setSerialPort(self,serialPort):
+        self.__serial_port = serialPort
 
     def receiveMvmnt(self):
         subscribedData = self.__clientObj.printFromSubscriber()
@@ -42,32 +44,33 @@ class controlSubscriber(object):
     def stopSubscribeLoop(self):
         self.__clientObj.endLoop()
 
-    def parseGuiData(self,data):
-        self.__sensorDataPreParse = data
-        data = str(data)  #Due to Python 3 update, information needs to be cast as a string again
-        sensorList = data.split(",")
-
-        if 'aQS' in sensorList[0] or 'gCS' in sensorList[1] or 'iRS' in sensorList[2]:
-
-            aQSFloat = sensorList[0]
-            aQSFloatData = aQSFloat.split(":")
-            self.__sensorDataPostParse['AirQualitySensor'] = aQSFloatData[1]
-
-            iRSFloat = sensorList[1]
-            iRSFloatData = iRSFloat.split(":")
-            self.__sensorDataPostParse['GasContentSensor'] = iRSFloatData[1]
-
-            gCSFloat = sensorList[2]
-            gCSFloatData = gCSFloat.split(":")
-            self.__sensorDataPostParse['InfraredTempSensor'] = gCSFloatData[1]
-
-        return(self.__sensorDataPostParse)
-
-
-
     def checkConnection(self):
         return(self.__connectionStatus)
 
     def checkClientDetails(self):
         details = self.__clientObj.getClientParams()
         return(details)
+
+    def writeToDUE(self,mvmntMsg):
+        #Adding the serial write method here to write to the motors
+        #on the Arduino DUE
+
+        print('wrote to DUE')
+        #ser = serial.Serial(port='COM8', baudrate=9600, timeout=2)
+
+        #while True:
+        #    while (ser.in_waiting>0):
+        #        print("in: "+str(ser.in_waiting))
+        #        ser.reset_input_buffer()
+        #        time.sleep(.01)
+        #    while (ser.out_waiting>0):
+        #        print("out: "+str(ser.out_waiting))
+        #        ser.reset_output_buffer()
+        #        time.sleep(.01)
+        #    ser.write(message.encode())
+        #    print("message sent")
+        #    data = ser.readline()
+        #    if data or True:
+        #        print(data.decode())
+        #    else:
+        #        print('nothing')

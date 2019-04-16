@@ -1,11 +1,12 @@
 import clientObjClass as cli
-import guiSubscriber as guiSub
+import controlSubscriber as controlSub
 
 broker = '143.215.99.102'
 port = 1883
-topic = 'guiParseTest'
+topic = 'controllerTest'
+serialPort = '~/dev/ttyACM0'
 
-clieSub = guiSub.guiSubscriber()
+clieSub = controlSub.controlSubscriber()
 
 clieSub.buildSubscriber()
 
@@ -13,28 +14,30 @@ clieSub.addSubscriberParams(broker,port,topic)
 
 clieSub.connectSubscriber()
 
+clieSub.setSerialPort(serialPort)
+
 a = clieSub.checkConnection()
 b = clieSub.checkClientDetails()
 
-#print("Subscriber details")
+print("Subscriber details")
 print(b)
-#print("Subscriber is connected: ")
+print("Subscriber is connected: ")
 print(a)
 
-subClient = clieSub.getClient()
+controlSubClient = clieSub.getClient()
 
-print(subClient)
+print(controlSubClient)
 print('Here in the subscriber')
 
 while True:
+    print('Output from receive Mvmnt')
+    mvmntData = clieSub.receiveMvmnt()
     print('Data received')
-    sensorData = clieSub.receiveGuiData()
-    print('Output from receive Gui Data')
-    print(sensorData)
+    print(mvmntData)
     #tracker += 1
     #print('At ' + str(tracker) + ' second ' + str(status))
-    newData = clieSub.parseGuiData(sensorData)
-    print('Data parsed into dictionary')
+    newData = clieSub.writeToDUE(mvmntData)
+    print('Data written to DUE')
     print(newData)
     print('\n')
 

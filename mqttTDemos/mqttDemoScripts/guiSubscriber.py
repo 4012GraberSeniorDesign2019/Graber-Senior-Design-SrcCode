@@ -42,6 +42,13 @@ class guiSubscriber(object):
     def stopSubscribeLoop(self):
         self.__clientObj.endLoop()
 
+    def isFloat(self,string):
+        try:
+            float(string)
+            return True
+        except ValueError:
+            return False
+
     def parseGuiData(self,data):
         self.__sensorDataPreParse = data
         data = str(data) #Casting to string type due to error between python 2 and 3
@@ -52,21 +59,25 @@ class guiSubscriber(object):
             aQSFloat = sensorList[0]
             aQSFloatData = aQSFloat.split(":")
             aQSFloatData[1] = float(aQSFloatData[1])
+            print(self.isFloat(aQSFloatData[1]))
             self.__sensorDataPostParse['AirQualitySensor'] = aQSFloatData[1]
 
             aTSFloat = sensorList[1]
             aTSFloatData = aTSFloat.split(":")
             aTSFloatData[1] = float(aTSFloatData[1])
+            print(self.isFloat(aTSFloatData[1]))
             self.__sensorDataPostParse['AmbientTempSensor'] = aTSFloatData[1]
 
             gCSFloat = sensorList[2]
             gCSFloatData = gCSFloat.split(":")
             gCSFloatData[1] = float(gCSFloatData[1])
+            print(self.isFloat(gCSFloatData[1]))
             self.__sensorDataPostParse['GasContentSensor'] = gCSFloatData[1]
 
             oTSFloat = sensorList[3]
             oTSFloatData = oTSFloat.split(":")
             oTSFloatData[1] = float(oTSFloatData[1])
+            print(self.isFloat(oTSFloatData[1]))
             self.__sensorDataPostParse['ObjectTempSensor'] = oTSFloatData[1]
 
         return(self.__sensorDataPostParse)

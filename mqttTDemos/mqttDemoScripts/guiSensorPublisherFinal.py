@@ -5,7 +5,7 @@ import time
 import serial
 import random
 
-broker = '143.215.95.16' #Always change this to the ip address sending the info
+broker = '143.215.99.102' #Always change this to the ip address sending the info
 port = 1883
 topic = 'guiParseTest'
 tracker = 0
