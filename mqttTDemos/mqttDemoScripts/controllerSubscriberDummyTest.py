@@ -1,10 +1,11 @@
 import clientObjClass as cli
 import controlSubscriber as controlSub
 
-broker = '143.215.99.102'
+broker = '192.168.137.1'#This should be the IP address
+#of the computer with GUI
 port = 1883
 topic = 'controllerTest'
-serialPort = '~/dev/ttyACM0'
+serialPort = '/dev/ttyACM0'
 
 clieSub = controlSub.controlSubscriber()
 
@@ -33,12 +34,12 @@ while True:
     print('Output from receive Mvmnt')
     mvmntData = clieSub.receiveMvmnt()
     print('Data received')
-    print(mvmntData)
+    #print(mvmntData)
     #tracker += 1
     #print('At ' + str(tracker) + ' second ' + str(status))
     newData = clieSub.writeToDUE(mvmntData)
     print('Data written to DUE')
-    print(newData)
+    #print(newData)
     print('\n')
 
 clieSub.foreverLoopClient()
