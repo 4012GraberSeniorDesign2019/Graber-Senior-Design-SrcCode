@@ -56,7 +56,7 @@ class controlSubscriber(object):
         #on the Arduino DUE
 
         print('wrote to DUE')
-        ser = serial.Serial(port= self.__serial_port, baudrate=9600, timeout=2)
+        ser = serial.Serial(port= self.__serial_port, baudrate=9600, timeout=0.1)
 
         while (ser.in_waiting>0):
             print("in: "+str(ser.in_waiting))
@@ -71,5 +71,6 @@ class controlSubscriber(object):
         data = ser.readline()
         if data or True:
             print(data.decode())
+            print(type(data.decode()))
         else:
             print('nothing')

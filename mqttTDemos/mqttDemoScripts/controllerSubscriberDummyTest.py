@@ -34,7 +34,7 @@ while True:
     print('Output from receive Mvmnt')
     mvmntData = clieSub.receiveMvmnt()
     print('Data received')
-    #print(mvmntData)
+    print(type(mvmntData))
     #tracker += 1
     #print('At ' + str(tracker) + ' second ' + str(status))
     newData = clieSub.writeToDUE(mvmntData)
