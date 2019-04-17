@@ -29,7 +29,7 @@ controlSubClient = clieSub.getClient()
 
 print(controlSubClient)
 print('Here in the subscriber')
-
+clieSub.connectToDUE()
 while True:
     print('Output from receive Mvmnt')
     mvmntData = clieSub.receiveMvmnt()

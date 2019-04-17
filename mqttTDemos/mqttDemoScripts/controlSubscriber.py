@@ -11,6 +11,7 @@ class controlSubscriber(object):
         clientObj = cli.clientObjClass()
         self.__clientObj = clientObj
         self.__serial_port = ''
+        self.__ser = None
 
     def getClient(self):
         a = self.__clientObj.getClient()
@@ -50,12 +51,21 @@ class controlSubscriber(object):
     def checkClientDetails(self):
         details = self.__clientObj.getClientParams()
         return(details)
+        
+    def connectToDUE(self):
+		#Actually connecting the serial port here to send information
+		self.__ser = serial.Serial(port = self.__serial_port,baudrate = 9600,timeout = 2)
+		usePort = self.__ser
+		try:
+			usePort.isOpen()
+		except:
+			print "Serial port error"
 
     def writeToDUE(self,mvmntMsg):
         #Adding the serial write method here to write to the motors
         #on the Arduino DUE
         print('wrote to DUE')
-        ser = serial.Serial(port= self.__serial_port, baudrate=9600, timeout=5)
+        ser = self.__ser
         while True:
             while (ser.in_waiting>0):
                 print("in: "+str(ser.in_waiting))
