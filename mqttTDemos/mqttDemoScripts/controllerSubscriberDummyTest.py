@@ -29,7 +29,7 @@ controlSubClient = clieSub.getClient()
 
 print(controlSubClient)
 print('Here in the subscriber')
-
+clieSub.connectToDUE()
 while True:
     print('Output from receive Mvmnt')
     mvmntData = clieSub.receiveMvmnt()
@@ -37,9 +37,13 @@ while True:
     print(type(mvmntData))
     #tracker += 1
     #print('At ' + str(tracker) + ' second ' + str(status))
-    newData = clieSub.writeToDUE(mvmntData)
+    
+    newData = str(clieSub.writeToDUE(mvmntData))
     print('Data written to DUE')
+<<<<<<< HEAD
     print(newData)
+=======
+>>>>>>> d0d855b23552233e34312da00e92a08ef1b3db10
     print('\n')
-
+    print("this is from the due"+newData)
 clieSub.foreverLoopClient()
