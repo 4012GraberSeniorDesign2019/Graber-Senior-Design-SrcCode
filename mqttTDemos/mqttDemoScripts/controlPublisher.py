@@ -270,7 +270,7 @@ class controlPublisher(object):
                     #Stops all motion
                     buttonAction = 'Everything was released'
 
-            if tempAction != buttonAction:
+            if tempAction != buttonAction: #substring changed to let go and moved to center
                 output = buttonAction
                 tempAction = buttonAction
             else:

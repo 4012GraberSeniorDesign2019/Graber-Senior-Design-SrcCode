@@ -29,17 +29,22 @@ pubClient = cliePub.getClient()
 print(pubClient)
 print('Here in the publisher')
 
+cliePub.initController()
+cliePub.actionTypeCreator()
 
 while True:
-    cliePub.initController()
-    cliePub.actionTypeCreator()
 
     mvmntData = cliePub.actionIdentifier()
 
     print('Sending mvmnt data to the subscriber')
     print('\n')
+
+    if mvmntData == None:
+        mvmntData = 'W' #Wait condition
+
+
     print(mvmntData)
-    time.sleep(1)
+    time.sleep(0.5)
     status = cliePub.publishMvmnt(mvmntData)
     print('Data published')
     #tracker += 1

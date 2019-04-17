@@ -39,7 +39,7 @@ while True:
     #print('At ' + str(tracker) + ' second ' + str(status))
     newData = clieSub.writeToDUE(mvmntData)
     print('Data written to DUE')
-    #print(newData)
+    print(newData)
     print('\n')
 
 clieSub.foreverLoopClient()
