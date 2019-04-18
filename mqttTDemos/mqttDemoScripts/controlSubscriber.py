@@ -51,19 +51,19 @@ class controlSubscriber(object):
     def checkClientDetails(self):
         details = self.__clientObj.getClientParams()
         return(details)
-        
+
     def connectToDUE(self):
-		#Actually connecting the serial port here to send information
-		self.__ser = serial.Serial(port = self.__serial_port,baudrate = 9600,timeout = 2)
-		usePort = self.__ser
-		try:
-			usePort.isOpen()
-		except:
-			print "Serial port error"
+        #Actually connecting the serial port here to send information
+        self.__ser = serial.Serial(port = self.__serial_port,baudrate = 9600,timeout = 2)
+        usePort = self.__ser
+        try:
+            usePort.isOpen()
+        except:
+            print "Serial port error"
 
     def writeToDUE(self,mvmntMsg):
         #Adding the serial write method here to write to the motors
-        #on the Arduino DUE
+        #on the Arduino DUE and it also reads from the sensor data from the DUE
         print('wrote to DUE')
         ser = self.__ser
         while True:
@@ -84,5 +84,5 @@ class controlSubscriber(object):
                 break
             else:
                 print('nothing')
-                
+
         return(data.decode())
