@@ -1,7 +1,7 @@
 import clientObjClass as cli
 import controlSubscriber as controlSub
 
-broker = '143.215.107.227'#This should be the IP address
+broker = '143.215.106.226'#This should be the IP address
 #of the computer with GUI
 port = 1883 #formerly 1883
 topic = 'controllerTest'
@@ -34,7 +34,7 @@ while True:
     print('Output from receive Mvmnt')
     mvmntData = clieSub.receiveMvmnt()
     print('Data received')
-    print(type(mvmntData))
+    print(mvmntData)
     #tracker += 1
     #print('At ' + str(tracker) + ' second ' + str(status))
 

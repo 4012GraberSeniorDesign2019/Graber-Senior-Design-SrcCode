@@ -7,7 +7,8 @@ import serial
 import random
 import threading
 
-broker = '143.215.99.102' #Always change this to the ip address sending the info
+guiBroker = '143.215.108.113' #Always change this to the ip address sending the info
+controlBroker = '143.215.106.226' #IP address of the device the controller is connected to
 port = 1883 #Port for MQTT info
 videoPort = 8000 #Port for video streaming
 topic1 = 'guiParseTest' #topic for Gui Data
@@ -26,9 +27,10 @@ def initialize():
     clieSub = controlSub.controlSubscriber()
     cliePub.buildPublisher()
     clieSub.buildSubscriber()
-    cliePub.addPublisherParams(broker,port,topic1)
-    clieSub.addSubscriberParams(broker,port,topic2)
-    clieSub.buildSocket()
+    cliePub.addPublisherParams(guiBroker,port,topic1)
+    clieSub.addSubscriberParams(controlBroker,port,topic2)
+    clieSub.setSerialPort("/dev/ttyACM0")
+    cliePub.buildSocket()
     pubClient = cliePub.getClient()
     controlSubClient = clieSub.getClient()
     #Connecting the publishers and subscribers
@@ -37,7 +39,7 @@ def initialize():
     #Connect to Arduino DUE
     clieSub.connectToDUE()
     #Connect socket for streaming
-    cliePub.connectSocket(broker,port)
+    cliePub.connectSocket(controlBroker,videoPort)
     #Connect publisher to serial port
     status = cliePub.connectSerialPort(baudrate,timeout)
 
@@ -69,20 +71,25 @@ def threadedMQTTProtocols():
         mvmntData = clieSub.receiveMvmnt()
         sensorData = clieSub.writeToDUE(mvmntData)
         g = cliePub.publishInfo(sensorData)
+        print(g)
 
 def threadedVideoProtocols(res = resolution, fr = framerate):
     cliePub.startStream(res,fr)
 
 
 def main():
+    #while True:
+        #try:
     initialize()
+        #except:
+            #print("initialize failed, trying again")
     while True:
-        try:
-            threading.Thread(target=threadedMQTTProtocols()).start()
+        #try:
+        threading.Thread(target=threadedMQTTProtocols()).start()
 
-            threading.Thread(target=threadedVideoProtocols()).start()
-        except:
-            initialize()
+        threading.Thread(target=threadedVideoProtocols()).start()
+        #except:
+        #initialize()
 
-if __name__ == '___main__':
+if __name__ == '__main__':
     main()

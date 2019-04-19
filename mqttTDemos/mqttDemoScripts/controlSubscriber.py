@@ -77,7 +77,12 @@ class controlSubscriber(object):
                 time.sleep(.01)
             ser.write(mvmntMsg.encode())
             print("message sent")
-            data = ser.readline()
+            try:
+                
+                data = ser.readline()
+            except:
+                data = False
+                
             if data:
                 print(data.decode())
                 print(type(data.decode()))

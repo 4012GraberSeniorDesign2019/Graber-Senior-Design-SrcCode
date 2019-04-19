@@ -52,7 +52,7 @@ class guiPublisher(object):
     def connectSerialPort(self,baudRate,timeOut):
         ser = serial.Serial(self.__serialPort,baudrate = baudRate,timeout = timeOut)
         self.__ser = ser
-        ser.open()
+        #ser.open() #serial already opened when serial.Serial is called
         return(ser.is_open())
 
     def readSerialPort(self):
