@@ -51,17 +51,17 @@ class clientObjClass(object):
         print("rc: " + str(rc))
 
     def on_message(client, userdata, msg):
-        print(msg.topic + " " + str(msg.payload))
-        #return(str(msg.payload))
+        #print(msg.topic + " " + str(msg.payload))
+        return(str(msg.payload))
 
     def on_publish(client, obj, mid):
-        print("mid: " + str(mid))
+        #print("mid: " + str(mid))
         pass
 
     def publishData(self,data):
         #pdb.setTrace()
         #print('got To Publish in clieObj')
-        self.__client.publish(self.__topic,data)
+        self.__client.publish(self.__topic,data,qos=0,retain=True)
         return('I published to the topic: [' + str(self.__topic) + '] with this data: [' + str(data) +']')
 
     def on_subscribe(client, obj, mid, granted_qos):
@@ -72,12 +72,9 @@ class clientObjClass(object):
 
     def printFromSubscriber(self):
         subTestClient = self.getClient()
-        print('Got into print from subscriber')
         #subTestClient.on_message()
 
-        print('Subscribed simply')
         subData = subscribe.simple(self.__topic,hostname = self.__broker,port = self.__port)
-        print("%s %s" % (str(subData.topic), str(subData.payload)))
         return(subData)
 
     def on_log(client, obj, level, string):

@@ -5,14 +5,14 @@ import pdb
 import time
 import serial
 import random
-import threading
+from multiprocessing import Process 
 
-guiBroker = '143.215.108.113' #Always change this to the ip address sending the info
+guiBroker = '143.215.101.233' #Always change this to the ip address sending the info
 controlBroker = '143.215.106.226' #IP address of the device the controller is connected to
 port = 1883 #Port for MQTT info
 videoPort = 8000 #Port for video streaming
 topic1 = 'guiParseTest' #topic for Gui Data
-topic2 = 'controlTest' #topic for controller data
+topic2 = 'controllerTest' #topic for controller data
 tracker = 0
 #sensorData = ''
 resolution = (640,480)
@@ -20,11 +20,15 @@ framerate = 100
 baudrate = 9600
 timeout = 2
 
+Loop = True
+
+cliePub = guiPub.guiPublisher()
+clieSub = controlSub.controlSubscriber()
+
 
 def initialize():
+    print("start init")
     #Initializing
-    cliePub = guiPub.guiPublisher()
-    clieSub = controlSub.controlSubscriber()
     cliePub.buildPublisher()
     clieSub.buildSubscriber()
     cliePub.addPublisherParams(guiBroker,port,topic1)
@@ -36,10 +40,9 @@ def initialize():
     #Connecting the publishers and subscribers
     cliePub.connectPublisher()
     clieSub.connectSubscriber()
+    print("connected")
     #Connect to Arduino DUE
     clieSub.connectToDUE()
-    #Connect socket for streaming
-    cliePub.connectSocket(controlBroker,videoPort)
     #Connect publisher to serial port
     status = cliePub.connectSerialPort(baudrate,timeout)
 
@@ -63,17 +66,20 @@ def initialize():
     print(controlSubClient)
 
     print(status)
+    print("done")
 
 
 #All the MQTT protocols packaged into one function to be threaded
 def threadedMQTTProtocols():
-    while True:
+    while Loop == True:
         mvmntData = clieSub.receiveMvmnt()
         sensorData = clieSub.writeToDUE(mvmntData)
         g = cliePub.publishInfo(sensorData)
-        print(g)
 
 def threadedVideoProtocols(res = resolution, fr = framerate):
+    #Connect socket for streaming
+    cliePub.connectSocket(controlBroker,videoPort)
+    print("video connected")
     cliePub.startStream(res,fr)
 
 
@@ -83,12 +89,24 @@ def main():
     initialize()
         #except:
             #print("initialize failed, trying again")
-    while True:
+    #while True:
+    #videoProcess = Process(target = threadedVideoProtocols)
+    #mqttProcess = Process(target = threadedMQTTProtocols)
+    print("process")
+    try:
         #try:
-        threading.Thread(target=threadedMQTTProtocols()).start()
-
-        threading.Thread(target=threadedVideoProtocols()).start()
+        #mqttProcess.start()
+        #videoProcess.start()
+        threadedMQTTProtocols()    
+        #mqttProcess.join()
+        #videoProcess.join()
         #except:
+        #Loop = False
+        #print("issue")
+    finally:
+        #mqttProcess.terminate()
+        #videoProcess.terminate()
+        print("terminated")
         #initialize()
 
 if __name__ == '__main__':

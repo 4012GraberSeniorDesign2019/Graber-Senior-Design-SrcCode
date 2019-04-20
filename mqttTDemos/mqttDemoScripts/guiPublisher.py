@@ -15,7 +15,7 @@ class guiPublisher(object):
         clientObj = cli.clientObjClass()
         self.__clientObj = clientObj
         self.__client_socket = ''
-        self.__serialPort = ''
+        self.__serialPort = '/dev/ttyACM0'
 
     def getClient(self):
         a = self.__clientObj.getClient()
@@ -45,7 +45,6 @@ class guiPublisher(object):
         status = self.__clientObj.endLoop()
 
     def publishInfo(self,data):
-        print('Assigned Sensor Data')
         a = self.__clientObj.publishData(data)
         return(a)
 
@@ -53,7 +52,7 @@ class guiPublisher(object):
         ser = serial.Serial(self.__serialPort,baudrate = baudRate,timeout = timeOut)
         self.__ser = ser
         #ser.open() #serial already opened when serial.Serial is called
-        return(ser.is_open())
+        return(ser.is_open)
 
     def readSerialPort(self):
         a = self.__ser.read()
