@@ -57,6 +57,9 @@ class controlPublisher(object):
         self.controller = pygame.joystick.Joystick(0)
         self.controller.init()
 
+    
+
+
     def actionTypeCreator(self):
 
         if not self.__axis_data:
